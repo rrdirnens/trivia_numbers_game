@@ -1,6 +1,9 @@
 <template>
     <div>
         <h1>Trivia Game</h1>
+        <div>
+            Current score is: {{ score }}
+        </div>
         <div v-if="gameState === 'playing'">
             <p>{{ question }}</p>
             <ul>

@@ -85,7 +85,13 @@ cd ../trivia_frontend
 npm install
 ```
 
-3. Compile and Hot-Reload for Development
+3. Create an .env file and add the following, replacing `http://localhost` with the URL of your backend API. For example, if your backend API is running on port 8000, the URL would be `http://localhost:8000/api/trivia`.
+```
+VITE_LARAVEL_API_ENDPOINT=http://localhost/api/trivia
+```
+
+
+4. Compile and Hot-Reload for Development. NOTE: don't use a WSL 2 terminal for this step, use a regular bash terminal or Powershell. This is a [known issue](https://vitejs.dev/config/server-options.html#server-watch).
 
 ```
 npm run dev
@@ -107,7 +113,7 @@ Port 5173 is in use, trying another one...
 
 Use the local address, i.e. http://localhost:5174/ to access the app in the browser.
 
-4. Compile and Minify for Production
+5. Compile and Minify for Production
 
 ```
 npm run build
