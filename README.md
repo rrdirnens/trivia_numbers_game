@@ -24,6 +24,16 @@ cp .env.example .env
 ```
 Note: Update the .env file with the appropriate settings if necessary.
 
+3. Run this command to install [composer dependencies](https://laravel.com/docs/10.x/sail#installing-composer-dependencies-for-existing-projects)
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php82-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
 3. Run the following command to start the Laravel Sail environment:
 
 ```
