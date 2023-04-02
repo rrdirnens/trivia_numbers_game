@@ -14,7 +14,7 @@ class TriviaController extends Controller
 
         try {
 
-            $response = $client->get('http://numbersapi.com/random/trivia?json');
+            $response = $client->get('http://numbersapi.com/random?json&min=1&max=100000');
             $data = json_decode($response->getBody()->getContents(), true);
 
             if (isset($data['number']) && isset($data['text'])) {
@@ -45,8 +45,10 @@ class TriviaController extends Controller
     private function generateWrongAnswers($correctAnswer)
     {
         $wrongAnswers = [];
+        $iterations = 0;
+        $maxIterations = 100; // This is to prevent an infinite loop. If the loop runs 100 times, it will stop. Although this is very unlikely to happen at this point, because the correct answer is always between 1 and 100000. But just in case.
 
-        while (count($wrongAnswers) < 3) {
+        while (count($wrongAnswers) < 3 && $iterations < $maxIterations) {
 
             $min = (int) max(1, $correctAnswer - 10);
             $max = (int) ($correctAnswer + 10);
@@ -56,6 +58,8 @@ class TriviaController extends Controller
             if ($randomAnswer !== $correctAnswer && !in_array($randomAnswer, $wrongAnswers)) {
                 $wrongAnswers[] = $randomAnswer;
             }
+
+            $iterations++;
         }
 
         return $wrongAnswers;

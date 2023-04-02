@@ -7,6 +7,7 @@ export const useTriviaStore = defineStore({
     currentQuestion: '',
     currentOptions: [],
     currentCorrectOption: null,
+    errorMessage: '',
   }),
   actions: {
     async fetchQuestion() {
@@ -20,12 +21,14 @@ export const useTriviaStore = defineStore({
           this.currentCorrectOption = data.correctOption;
         } else {
           throw new Error('Failed to fetch trivia question');
-          // Handle the error accordingly (e.g. show a notification)
         }
       } catch (error) {
         console.error('Error fetching trivia question:', error);
-        // Handle the error accordingly (e.g. show a notification)
+        this.errorMessage = 'Failed to fetch trivia question'
       }
     },
+    resetError() {
+      this.errorMessage = null;
+    }
   },
 });
