@@ -22,6 +22,22 @@ npm install
 npm run dev
 ```
 
+you will see something like: 
+```
+> trivia_front@0.0.0 dev
+> vite
+
+Port 5173 is in use, trying another one...
+
+  VITE v4.2.1  ready in 1924 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: use --host to expose
+  ➜  press h to show help
+```
+
+Use the local address, i.e. http://localhost:5174/ to access the app in the browser.
+
 ### Compile and Minify for Production
 
 ```sh
