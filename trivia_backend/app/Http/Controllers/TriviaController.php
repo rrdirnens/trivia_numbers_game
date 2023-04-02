@@ -29,13 +29,11 @@ class TriviaController extends Controller
                     'options' => $options,
                     'correctOption' => $correctAnswer,
                 ]);
-
             } else {
                 return response()->json([
                     'error' => 'Failed to fetch trivia question',
                 ], 500);
             }
-
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Failed to fetch trivia question',
@@ -49,7 +47,11 @@ class TriviaController extends Controller
         $wrongAnswers = [];
 
         while (count($wrongAnswers) < 3) {
-            $randomAnswer = rand(max(1, $correctAnswer - 10), $correctAnswer + 10);
+
+            $min = (int) max(1, $correctAnswer - 10);
+            $max = (int) ($correctAnswer + 10);
+
+            $randomAnswer = mt_rand($min, $max);
 
             if ($randomAnswer !== $correctAnswer && !in_array($randomAnswer, $wrongAnswers)) {
                 $wrongAnswers[] = $randomAnswer;
@@ -62,7 +64,9 @@ class TriviaController extends Controller
     // This function replaces the number in the trivia text with a blank
     public function replaceNumberWithBlank($triviaText, $correctAnswer)
     {
-        $triviaText = str_replace($correctAnswer, '_____', $triviaText);
+        $correctAnswerString = strval($correctAnswer);
+
+        $triviaText = str_replace($correctAnswerString, '_____', $triviaText);
 
         return $triviaText;
     }
@@ -71,6 +75,7 @@ class TriviaController extends Controller
     public function shuffledOptions($correctAnswer, $wrongAnswers)
     {
         $options = array_merge([$correctAnswer], $wrongAnswers);
+        
         shuffle($options);
 
         return $options;

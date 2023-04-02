@@ -34,7 +34,7 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-3. Run the following command to start the Laravel Sail environment:
+4. Run the following command to start the Laravel Sail environment:
 
 ```
 ./vendor/bin/sail up
@@ -49,13 +49,13 @@ If you don't have the sail command available, you can use Docker Compose directl
 docker-compose up -d
 ```
 
-4. Once the containers are up and running, install the project dependencies:
+5. Once the containers are up and running, install the project dependencies:
 ```
 ./vendor/bin/sail composer install
 ./vendor/bin/sail npm install
 ```
 
-5. Generate an application key:
+6. Generate an application key:
 
 ```
 ./vendor/bin/sail artisan key:generate
