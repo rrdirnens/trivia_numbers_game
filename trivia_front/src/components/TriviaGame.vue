@@ -61,7 +61,14 @@ export default {
 
         const fetchQuestion = async () => {
             loading.value = true;
-            await store.fetchQuestion();
+            while (true) {
+                await store.fetchQuestion();           
+                const questionKey = `${store.currentQuestion}-${store.currentCorrectOption}`;
+                if (!store.askedQuestions.has(questionKey)) {
+                    store.askedQuestions.add(questionKey);
+                    break;
+                }
+            }
             loading.value = false;
         };
 
@@ -86,6 +93,7 @@ export default {
             lastQuestion.value = '';
             score.value = 0;
             store.resetError();
+            store.clearAskedQuestions();
             fetchQuestion();
         };
 

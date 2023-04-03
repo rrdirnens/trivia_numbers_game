@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 
 export const useTriviaStore = defineStore({
@@ -8,6 +9,8 @@ export const useTriviaStore = defineStore({
     currentOptions: [],
     currentCorrectOption: null,
     errorMessage: '',
+    askedQuestions: ref(new Set()),
+
   }),
   actions: {
     async fetchQuestion() {
@@ -29,6 +32,9 @@ export const useTriviaStore = defineStore({
     },
     resetError() {
       this.errorMessage = null;
+    },
+    clearAskedQuestions() {
+      this.askedQuestions.clear();
     }
   },
 });
